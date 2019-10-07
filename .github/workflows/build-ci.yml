@@ -1,6 +1,7 @@
 name: Build CI Docker Images
 
 on:
+  repository_dispatch: null
   schedule:
     - cron: '0 0 * * *'
 
