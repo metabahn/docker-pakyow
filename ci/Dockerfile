@@ -12,7 +12,7 @@ RUN apt-get -y install libmysqlclient-dev libpq-dev libsqlite3-dev cmake
 RUN mkdir -p /pakyow
 WORKDIR /pakyow
 
-COPY ./pakyow-master/* .
+COPY ../pakyow-master/* .
 RUN gem install bundler
 RUN bundle install --jobs=3
 
