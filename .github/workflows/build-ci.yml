@@ -5,13 +5,12 @@ on: repository_dispatch
 jobs:
   build-ruby-2_6_5:
     name: Build Ruby 2.6.5
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@master
 
-    - name: Clone pakyow
+    - name: Download pakyow
       run: |
         wget https://github.com/pakyow/pakyow/archive/master.zip
         unzip master.zip
-        ls
