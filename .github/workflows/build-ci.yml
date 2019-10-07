@@ -3,7 +3,7 @@ name: Build CI Docker Images
 on: repository_dispatch
 
 jobs:
-  build-ruby-2.6.5:
+  build-ruby-2_6_5:
     name: Build Ruby 2.6.5
     runs-on: ubuntu-18.04
 
