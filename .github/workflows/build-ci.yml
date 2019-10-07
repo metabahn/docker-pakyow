@@ -17,4 +17,4 @@ jobs:
 
     - name: Build the Docker container image
       run: |
-        docker build --build-arg ruby=2.6.5 -t docker.pkg.github.com/metabahn/pakyow/ci-ruby-2.6.5:latest .
+        docker build --build-arg ruby=2.6.5 -t pakyow/ci-ruby-2.6.5:latest ci
