@@ -1,6 +1,8 @@
 name: Build CI Docker Images
 
-on: repository_dispatch
+on:
+  schedule:
+    -cron: '0 0 * * *'
 
 jobs:
   build-ruby:
