@@ -12,11 +12,13 @@ jobs:
 
     - name: Download pakyow
       run: |
+        cd ci
         wget https://github.com/pakyow/pakyow/archive/master.zip
         unzip master.zip
-        ls
+        pwd
         ls pakyow-master
 
     - name: Build the Docker container image
       run: |
-        docker build --build-arg ruby=2.6.5 -t pakyow/ci-ruby-2.6.5:latest ci
+        cd ci
+        docker build --build-arg ruby=2.6.5 -t pakyow/ci-ruby-2.6.5:latest .

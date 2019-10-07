@@ -9,10 +9,9 @@ RUN rvm --default use $ruby
 RUN apt-get update
 RUN apt-get -y install libmysqlclient-dev libpq-dev libsqlite3-dev cmake
 
-RUN mkdir -p /pakyow
-WORKDIR /pakyow
+COPY ./pakyow-master/* /pakyow
 
-COPY ../pakyow-master/* .
+WORKDIR /pakyow
 RUN gem install bundler
 RUN bundle install --jobs=3
 
