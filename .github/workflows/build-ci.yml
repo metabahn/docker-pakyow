@@ -20,3 +20,12 @@ jobs:
       run: |
         cd ci
         docker build --build-arg ruby=2.6.5 -t pakyow/ci-ruby-2.6.5:latest .
+
+    - name: Push the image to docker hub
+      run: |
+        docker login -u ${DOCKER_HUB_USER} -p "${DOCKER_HUB_TOKEN}"
+        docker push pakyow/ci-ruby-2.6.5:latest
+
+      env:
+        DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+        DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
