@@ -22,6 +22,8 @@ RUN gem update --system
 RUN gem install bundler
 RUN bundle install --jobs=3
 
+RUN cd pakyow-js && npm install
+
 RUN rm -rf /pakyow
 
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
