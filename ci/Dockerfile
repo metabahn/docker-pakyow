@@ -18,6 +18,7 @@ RUN apt-get -y install tzdata
 COPY ./pakyow-master /pakyow
 
 WORKDIR /pakyow
+RUN gem update --system
 RUN gem install bundler
 RUN bundle install --jobs=3
 
