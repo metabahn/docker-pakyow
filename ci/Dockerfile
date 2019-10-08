@@ -4,6 +4,8 @@ ARG RVM_RUBY_VERSIONS=$ruby
 FROM msati/docker-rvm
 ENV RUBY=$ruby
 
+ENV LANG C.UTF-8
+
 RUN rvm --default use $ruby
 
 RUN apt-get update
