@@ -22,10 +22,13 @@ RUN gem update --system
 RUN gem install bundler
 RUN bundle install --jobs=3
 
-RUN mkdir -p /vendor/node_modules
-RUN npm config set prefix "/vendor/node_modules"
 RUN cd pakyow-js && npm install
 
-RUN rm -rf /pakyow
+RUN mkdir -p /vendor
+RUN mv /pakyow/pakyow-js/node_modules /vendor
+RUN rm -rf /pakyow/*
+RUN mkdir -p /pakyow/pakyow-js
+RUN mv /vendor/node_modules /pakyow/pakyow-js
+RUN rm -rf /vendor
 
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
