@@ -22,6 +22,8 @@ RUN gem update --system
 RUN gem install bundler
 RUN bundle install --jobs=3
 
+RUN mkdir -p /vendor/node_modules
+RUN npm config set prefix "/vendor/node_modules"
 RUN cd pakyow-js && npm install
 
 RUN rm -rf /pakyow
