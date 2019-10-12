@@ -17,7 +17,7 @@ RUN apt-get -y install tzdata
 COPY ./pakyow-master /pakyow
 
 WORKDIR /pakyow
-RUN bundle config force_ruby_platform true
+ENV BUNDLE_BUILD__SASSC=--disable-march-tune-native
 RUN gem update --system
 RUN gem install bundler
 RUN bundle install --jobs=3
