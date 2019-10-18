@@ -22,13 +22,6 @@ RUN gem update --system
 RUN gem install bundler
 RUN bundle install --jobs=3
 
-RUN cd pakyow-js && npm install
-
-RUN mkdir -p /vendor
-RUN mv /pakyow/pakyow-js/node_modules /vendor
-RUN rm -rf /pakyow/*
-RUN mkdir -p /pakyow/pakyow-js
-RUN mv /vendor/node_modules /pakyow/pakyow-js
-RUN rm -rf /vendor
+RUN cd pakyow-js && npm install -g && rm -f pakyow-js/package-lock.json && rm -rf node_modules
 
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
