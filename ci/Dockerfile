@@ -30,9 +30,14 @@ COPY ./files/chruby.sh /etc/profile.d/chruby.sh
 COPY ./pakyow-master /pakyow
 WORKDIR /pakyow
 
+# Fixes "mesg: ttyname failed: Inappropriate ioctl for device" warning.
+#
+RUN cp /etc/profile /root/.profile
+
+SHELL ["/bin/bash", "-l", "-c"]
+
 ENV BUNDLE_BUILD__SASSC=--disable-march-tune-native
 RUN gem update --system
-RUN gem install bundler
 RUN bundle install --jobs=3
 
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
