@@ -1,0 +1,25 @@
+ARG ruby
+ARG RVM_RUBY_VERSIONS=$ruby
+
+FROM msati/docker-rvm
+ENV RUBY=$ruby
+
+ENV LANG C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN rvm --default use $ruby
+
+RUN apt-get update
+RUN apt-get -y install apt-utils libmysqlclient-dev libpq-dev libsqlite3-dev cmake glib2.0
+RUN apt-get -y install nodejs npm
+RUN apt-get -y install tzdata
+
+COPY ./pakyow-master /pakyow
+
+WORKDIR /pakyow
+ENV BUNDLE_BUILD__SASSC=--disable-march-tune-native
+RUN gem update --system
+RUN gem install bundler
+RUN bundle install --jobs=3
+
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
