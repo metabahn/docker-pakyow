@@ -1,24 +1,22 @@
-ARG ruby
-ARG RVM_RUBY_VERSIONS=$ruby
+FROM ubuntu:18.04
 
-FROM msati/docker-rvm
+ARG ruby
 ENV RUBY=$ruby
 
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN rvm --default use $ruby
-
 RUN apt-get update
 RUN apt-get -y install apt-utils libmysqlclient-dev libpq-dev libsqlite3-dev cmake glib2.0
-RUN apt-get -y install tzdata
+RUN apt-get -y install nodejs
+RUN apt-get -y install npm
 
 COPY ./pakyow-master /pakyow
 
 WORKDIR /pakyow
-ENV BUNDLE_BUILD__SASSC=--disable-march-tune-native
-RUN gem update --system
-RUN gem install bundler
-RUN bundle install --jobs=3
+
+# Fixes "mesg: ttyname failed: Inappropriate ioctl for device" warning.
+#
+RUN cp /etc/profile /root/.profile
 
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
