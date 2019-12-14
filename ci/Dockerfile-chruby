@@ -8,7 +8,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update
 RUN apt-get -y install apt-utils libmysqlclient-dev libpq-dev libsqlite3-dev cmake glib2.0
-RUN apt-get -y install nodejs npm
+RUN apt-get -y install nodejs
+RUN apt-get -y install npm
 RUN apt-get -y install tzdata
 RUN apt-get -y install curl
 
