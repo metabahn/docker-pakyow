@@ -13,8 +13,9 @@ jobs:
     strategy:
       matrix:
         ruby:
-          - 2.5.7
-          - 2.6.5
+          - "2.5.7"
+          - "2.6.5"
+          - "2.7.0-preview3"
 
     steps:
     - uses: actions/checkout@master
@@ -28,7 +29,7 @@ jobs:
     - name: Build the Docker container image
       run: |
         cd ci
-        docker build --build-arg ruby=${{ matrix.ruby }} -t pakyow/ci-ruby-${{ matrix.ruby }}:latest .
+        docker build -f Dockerfile-chruby --build-arg ruby=${{ matrix.ruby }} -t pakyow/ci-ruby-${{ matrix.ruby }}:latest .
 
     - name: Push the image to docker hub
       run: |
@@ -51,17 +52,14 @@ jobs:
         cd ci
         wget https://github.com/pakyow/pakyow/archive/master.zip
         unzip master.zip
-
     - name: Build the Docker container image
       run: |
         cd ci
-        docker build --build-arg ruby=ruby-head -t pakyow/ci-ruby-head:latest .
-
+        docker build -f Dockerfile-rvm --build-arg ruby=ruby-head -t pakyow/ci-ruby-head:latest .
     - name: Push the image to docker hub
       run: |
         docker login -u ${DOCKER_HUB_USER} -p "${DOCKER_HUB_TOKEN}"
         docker push pakyow/ci-ruby-head:latest
-
       env:
         DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
         DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
