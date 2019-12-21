@@ -37,6 +37,7 @@ SHELL ["/bin/bash", "-l", "-c"]
 
 ENV BUNDLE_BUILD__SASSC=--disable-march-tune-native
 RUN gem update --system
+RUN gem install bundler
 RUN bundle install --jobs=3
 
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
