@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update
 RUN apt-get -y install apt-utils libmysqlclient-dev libpq-dev libsqlite3-dev cmake glib2.0 curl
-RUN curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_13.x | bash -
 RUN apt-get -y install nodejs
 
 COPY ./pakyow-master /pakyow
