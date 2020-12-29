@@ -45,29 +45,29 @@ jobs:
         DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
         DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
 
-  build-ruby-head:
-    name: Build Ruby Head
-    runs-on: ubuntu-latest
+  # build-ruby-head:
+  #   name: Build Ruby Head
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@master
+  #   steps:
+  #   - uses: actions/checkout@master
 
-    - name: Download pakyow
-      run: |
-        cd ci
-        wget https://github.com/pakyow/pakyow/archive/master.zip
-        unzip master.zip
-    - name: Build the Docker container image
-      run: |
-        cd ci
-        docker build -f Dockerfile-rvm --build-arg ruby=ruby-head -t pakyow/ci-ruby-head:latest .
-    - name: Push the image to docker hub
-      run: |
-        docker login -u ${DOCKER_HUB_USER} -p "${DOCKER_HUB_TOKEN}"
-        docker push pakyow/ci-ruby-head:latest
-      env:
-        DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
-        DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
+  #   - name: Download pakyow
+  #     run: |
+  #       cd ci
+  #       wget https://github.com/pakyow/pakyow/archive/master.zip
+  #       unzip master.zip
+  #   - name: Build the Docker container image
+  #     run: |
+  #       cd ci
+  #       docker build -f Dockerfile-rvm --build-arg ruby=ruby-head -t pakyow/ci-ruby-head:latest .
+  #   - name: Push the image to docker hub
+  #     run: |
+  #       docker login -u ${DOCKER_HUB_USER} -p "${DOCKER_HUB_TOKEN}"
+  #       docker push pakyow/ci-ruby-head:latest
+  #     env:
+  #       DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+  #       DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
 
   build-npm:
     name: Build NPM
